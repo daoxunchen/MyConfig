@@ -1,0 +1,13 @@
+[http]
+	proxy = http://127.0.0.1:1080
+[user]
+	email = acy631545607@gmail.com
+	name = daoxunchen
+[push]
+	default = simple
+[alias]
+	co = checkout
+	ci = commit
+	br = branch
+	last = log -1
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
