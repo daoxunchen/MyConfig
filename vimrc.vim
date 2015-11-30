@@ -81,3 +81,81 @@ if has('langmap') && exists('+langnoremap')
   " compatible).
   set langnoremap
 endif
+
+" ========================Config from amix[github/amix]===================
+" => General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nu
+set autoread
+
+let mapleader = ","
+"let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" => VIM user interface
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+if has("win32")
+	set wildignore+=*/.git/*
+else
+	set wildignore+=.git\*
+endif
+
+"set cmdheight = 2
+
+set hid
+set whichwrap+=h,l
+
+set ignorecase
+set smartcase
+
+set lazyredraw
+
+set magic
+
+set showmatch
+
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" => Colors and Fonts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf8
+
+" => Files, backups and undo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nowb
+set noswapfile
+
+" => Text, tab and indent related
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set smarttab
+set shiftwidth=4
+set tabstop=4
+
+set lbr
+set tw=500
+
+set ai
+set si
+set wrap
+
+" => Status line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+
+" => Helper functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! HasPaste()
+	if &paste
+		return 'PASTE MODE  '
+	endif
+	return ''
+endfunction
