@@ -148,7 +148,7 @@ nmap <leader>w :w!<cr>
 map <C-n> :NERDTree<cr>
 
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '/home/weiyu/.vim/bundle/YouCompleteMe/.ycm_global_ycm_extra_conf'
+let g:ycm_global_ycm_extra_conf = '/home/weiyu/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
 
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
