@@ -18,8 +18,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'weynhamz/vim-plugin-minibufexpl'
-" Plugin 'Valloric/YouCompleteMe'
-
+Plugin 'Valloric/YouCompleteMe'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -148,7 +147,7 @@ nmap <leader>w :w!<cr>
 map <C-n> :NERDTree<cr>
 
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '/home/weiyu/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
