@@ -1,4 +1,7 @@
 # MyConfig
+
+just ./run.sh
+
 My Config Files
 
 * gitconfig file is my git config, mv it to $HOME dir and rename it ".gitconfig"
