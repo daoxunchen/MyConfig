@@ -1,3 +1,3 @@
-mv gitconfig ~/.gitconfig
-mv vimrc.vim ~/.vimrc
-mv ycm.conf ~/.ycm_extra_conf.py
+cp MyConfig/gitconfig ~/.gitconfig
+cp MyConfig/vimrc.vim ~/.vimrc
+cp MyConfig/ycm.conf ~/.ycm_extra_conf.py
