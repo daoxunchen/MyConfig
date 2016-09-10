@@ -218,9 +218,13 @@ set wrap
 
 " => Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 状态行显示的内容
 set laststatus=2
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
+set statusline=\ %{HasPaste()}%F%m%r%h%w
+set statusline+=\ [%Y,%{strlen(&fenc)?&fenc:&enc},%{&ff}]
+set statusline+=\ [CWD:%{getcwd()}]
+set statusline+=\ \ [POS=%l,%v][%p%%]
+set statusline+=\ %{fugitive#statusline()}%=[%{strftime(\"%d/%m/%y\ -\ %H:%M\")}]  
 
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
