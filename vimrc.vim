@@ -224,7 +224,7 @@ set statusline=\ %{HasPaste()}%F%m%r%h%w
 set statusline+=\ [%Y,%{strlen(&fenc)?&fenc:&enc},%{&ff}]
 set statusline+=\ [CWD:%{getcwd()}]
 set statusline+=\ \ [POS=%l,%v][%p%%]
-set statusline+=\ %{fugitive#statusline()}%=[%{strftime(\"%d/%m/%y\ -\ %H:%M\")}]  
+set statusline+=\ %=[%{strftime(\"%d/%m/%y\ -\ %H:%M\")}]  
 
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
