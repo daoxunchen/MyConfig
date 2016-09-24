@@ -148,6 +148,11 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Compile Cpp
+nnoremap <F5> <Esc>:w<CR>:!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<CR>
+
+" => Plugin 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open NERD Tree
 map <C-n> :NERDTree<cr>
 
@@ -163,7 +168,8 @@ let g:formatdef_clangformat = "'clang-format -style=WebKit'"
 noremap <F3> :Autoformat<CR>
 
 " rainbow
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle"
+let g:rainbow_active = 1 
+"0 if you want to enable it later via :RainbowToggle"
 
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
