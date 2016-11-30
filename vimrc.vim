@@ -22,6 +22,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'vim-scripts/JavaScript-Indent'
 
 " Plugin 'Valloric/YouCompleteMe'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -164,8 +166,12 @@ let g:ycm_warning_symbol = '>*'
 
 " auto-format
 let g:autoformat_verbosemode = 1
-let g:formatdef_clangformat = "'clang-format -style=WebKit'"
-noremap <F3> :Autoformat<CR>
+if has('python')
+	let g:formatdef_clangformat = "'clang-format -style=WebKit'"
+	noremap <F3> :Autoformat<CR>
+else
+	nnoremap <F3> <Esc>:w<CR>:!clang-format -style=WebKit -i %<CR><CR>
+endif
 
 " rainbow
 let g:rainbow_active = 1 
