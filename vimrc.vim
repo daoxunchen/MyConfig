@@ -24,6 +24,8 @@ Plugin 'luochen1990/rainbow'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'vim-scripts/JavaScript-Indent'
+Plugin 'jsfaint/gen_tags.vim'
+Plugin 'majutsushi/tagbar'
 
 " Plugin 'Valloric/YouCompleteMe'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -176,6 +178,9 @@ endif
 " rainbow
 let g:rainbow_active = 1 
 "0 if you want to enable it later via :RainbowToggle"
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
