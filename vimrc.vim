@@ -22,10 +22,20 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'vim-scripts/JavaScript-Indent'
-Plugin 'jsfaint/gen_tags.vim'
-Plugin 'majutsushi/tagbar'
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'vim-scripts/JavaScript-Indent'
+" Plugin 'jsfaint/gen_tags.vim'
+" Plugin 'majutsushi/tagbar'
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+" Optional:
+Plugin 'honza/vim-snippets'
+
+Plugin 'vim-syntastic/syntastic'
+Plugin 'davidhalter/jedi-vim'
 
 " Plugin 'Valloric/YouCompleteMe'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -152,13 +162,15 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" Compile Cpp
-nnoremap <F5> <Esc>:w<CR>:!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<CR>
+" Quickly Run
+"nnoremap <F5> <Esc>:w<CR>:!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<CR>
+nnoremap <F5> :call CompileAndRun()<CR>
 
 " => Plugin 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open NERD Tree
 map <C-n> :NERDTree<cr>
+autocmd vimenter * if !argc() | NERDTree | endif
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -168,12 +180,9 @@ let g:ycm_warning_symbol = '>*'
 
 " auto-format
 let g:autoformat_verbosemode = 1
-if has('python')
-	let g:formatdef_clangformat = "'clang-format -style=WebKit'"
-	noremap <F3> :Autoformat<CR>
-else
-	nnoremap <F3> <Esc>:w<CR>:!clang-format -style=WebKit -i %<CR><CR>
-endif
+let g:formatdef_clangformat = "'clang-format -style=WebKit'"
+noremap <F3> :Autoformat<CR>
+"nnoremap <F3> <Esc>:w<CR>:!clang-format -style=WebKit -i %<CR><CR>
 
 " rainbow
 let g:rainbow_active = 1 
@@ -181,6 +190,12 @@ let g:rainbow_active = 1
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -241,6 +256,9 @@ set statusline=\ %{HasPaste()}%F%m%r%h%w
 set statusline+=\ [%Y,%{strlen(&fenc)?&fenc:&enc},%{&ff}]
 set statusline+=\ [CWD:%{getcwd()}]
 set statusline+=\ \ [POS=%l,%v][%p%%]
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 set statusline+=\ %=[%{strftime(\"%d/%m/%y\ -\ %H:%M\")}]  
 
 " => Helper functions
@@ -250,4 +268,15 @@ function! HasPaste()
 		return 'PASTE MODE  '
 	endif
 	return ''
+endfunction
+
+function! CompileAndRun()
+	exec "w"
+	if &filetype == 'c'
+		exec '!gcc % -o /tmp/%< && time /tmp/%<'
+	elseif &filetype == 'cpp'
+		exec '!g++ -std=c++11 % -o /tmp/%< && time /tmp/%<'
+	elseif &filetype == 'python'
+		exec '!time python3 %'
+	endif
 endfunction
