@@ -27,15 +27,8 @@ Plugin 'easymotion/vim-easymotion'
 " Plugin 'jsfaint/gen_tags.vim'
 " Plugin 'majutsushi/tagbar'
 
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-
-" Optional:
-Plugin 'honza/vim-snippets'
-
 Plugin 'vim-syntastic/syntastic'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 
 " Plugin 'Valloric/YouCompleteMe'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -177,6 +170,7 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_warning_symbol = '>*'
+"let g:ycm_python_binary_path = 'python3'
 
 " auto-format
 let g:autoformat_verbosemode = 1
@@ -197,6 +191,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+"let g:jedi#completions_enabled = 0
+"let g:jedi#force_py_version=3
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmenu
