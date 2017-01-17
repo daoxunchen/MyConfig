@@ -22,15 +22,16 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'jmcantrell/vim-virtualenv'
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'vim-scripts/JavaScript-Indent'
 " Plugin 'jsfaint/gen_tags.vim'
 " Plugin 'majutsushi/tagbar'
 
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'vim-syntastic/syntastic'
 "Plugin 'davidhalter/jedi-vim'
 
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -150,10 +151,27 @@ set nu
 set autoread
 
 let mapleader = ","
-"let g:mapleader = ","
+let g:mapleader = ","
 
-" Fast saving
-nmap <leader>w :w!<cr>
+" => Hotkey
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fast saving and close
+nmap <leader>w :w<cr>
+cmap w!! w !sudo tee >/dev/null %
+nmap <leader>q :q<cr>
+
+" Move between Windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" F2 行号开关
+"nnoremap <F2> :call HideNumber()<CR>
+nnoremap <F2> :set number! number?<CR>
+
+" F4 换行开关
+nnoremap <F4> :set wrap! wrap?<CR>
 
 " Quickly Run
 "nnoremap <F5> <Esc>:w<CR>:!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<CR>
@@ -167,10 +185,14 @@ autocmd vimenter * if !argc() | NERDTree | endif
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_completion = 2
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_warning_symbol = '>*'
-"let g:ycm_python_binary_path = 'python3'
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_key_invoke_completion = ''
+map <F9> :YcmCompleter FixIt<CR>
+
+let g:virtualenv_directory = '~/.local'
 
 " auto-format
 let g:autoformat_verbosemode = 1
@@ -186,13 +208,11 @@ let g:rainbow_active = 1
 nmap <F8> :TagbarToggle<CR>
 
 " syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
 
-"let g:jedi#completions_enabled = 0
-"let g:jedi#force_py_version=3
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmenu
@@ -221,10 +241,18 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+" 光标上下行至少保留的行数
+set scrolloff=5
 
 " => Colors and Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf8
+set encoding=utf-8
+set termencoding=utf-8
+
+" 如遇 Unicode > 255 的文本，不必等到空行再折行
+set formatoptions+=m
+" 合并两行中文时，不在中间加空格
+set formatoptions+=B
 
 " => Files, backups and undo
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,6 +264,7 @@ set noswapfile
 set smarttab
 set shiftwidth=4
 set tabstop=4
+set softtabstop=4
 
 set lbr
 set tw=500
@@ -243,6 +272,12 @@ set tw=500
 set ai
 set si
 set wrap
+
+" => Others
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 让补全菜单行为与一般IDE一致
+set completeopt=longest,menu
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 
 " => Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -253,7 +288,7 @@ set statusline+=\ [%Y,%{strlen(&fenc)?&fenc:&enc},%{&ff}]
 set statusline+=\ [CWD:%{getcwd()}]
 set statusline+=\ \ [POS=%l,%v][%p%%]
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=\ %=[%{strftime(\"%d/%m/%y\ -\ %H:%M\")}]  
 
@@ -273,6 +308,18 @@ function! CompileAndRun()
 	elseif &filetype == 'cpp'
 		exec '!g++ -std=c++11 % -o /tmp/%< && time /tmp/%<'
 	elseif &filetype == 'python'
-		exec '!time python3 %'
+		exec '!time python %'
 	endif
+endfunction
+
+function! HideNumber()
+	if(&relativenumber == &number)
+		set relativenumber! number!
+	elseif(&number)
+		set number!
+	else
+		set relativenumber!
+	endif
+
+	set number?
 endfunction
