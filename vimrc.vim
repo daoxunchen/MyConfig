@@ -309,6 +309,8 @@ function! CompileAndRun()
 		exec '!g++ -std=c++11 % -o /tmp/%< && time /tmp/%<'
 	elseif &filetype == 'python'
 		exec '!time python %'
+	elseif &filetype == 'lua'
+		exec '!time lua %'
 	endif
 endfunction
 
