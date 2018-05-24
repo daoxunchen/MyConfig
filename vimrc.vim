@@ -13,16 +13,14 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Chiel92/vim-autoformat'
 Plug 'luochen1990/rainbow'
 Plug 'easymotion/vim-easymotion'
-Plug 'jmcantrell/vim-virtualenv'
+Plug 'jmcantrell/vim-virtualenv' ,{'for':'python'}
 " Plug 'jelera/vim-javascript-syntax'
 " Plug 'vim-scripts/JavaScript-Indent'
 " Plug 'jsfaint/gen_tags.vim'
-" Plug 'majutsushi/tagbar'
 
-"Plug 'vim-syntastic/syntastic'
 "Plug 'davidhalter/jedi-vim'
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe',{'for':['c','c++'],'do':'./install.py --clang-completer'}
 
 " Initialize plugin system
 call plug#end()
@@ -125,6 +123,8 @@ let g:mapleader = ","
 
 autocmd BufNewFile *.cpp,*.cc,*.[ch],*.sh,*.py exec ":call SetTitle()" 
 autocmd BufNewFile * normal G
+
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " => Hotkey
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
