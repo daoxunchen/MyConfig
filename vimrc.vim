@@ -123,6 +123,9 @@ set autoread
 let mapleader = ","
 let g:mapleader = ","
 
+autocmd BufNewFile *.cpp,*.cc,*.[ch],*.sh,*.py exec ":call SetTitle()" 
+autocmd BufNewFile * normal G
+
 " => Hotkey
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast saving and close
@@ -165,7 +168,7 @@ map <F9> :YcmCompleter FixIt<CR>
 let g:virtualenv_directory = '~/.local'
 
 " auto-format
-let g:autoformat_verbosemode = 1
+let g:autoformat_verbosemode = 0
 let g:formatdef_clangformat = "'clang-format -style=WebKit'"
 noremap <F3> :Autoformat<CR>
 "nnoremap <F3> <Esc>:w<CR>:!clang-format -style=WebKit -i %<CR><CR>
@@ -182,6 +185,14 @@ nmap <F8> :TagbarToggle<CR>
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 0
 "let g:syntastic_check_on_wq = 0
+
+" completor
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+" python-mode
+let g:pymode_folding = 0
 
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -294,4 +305,38 @@ function! HideNumber()
 	endif
 
 	set number?
+endfunction
+
+function! SetTitle()
+	if &filetype == 'sh' 
+		call setline(1,"\#!/bin/bash") 
+		call append(line("."), "") 
+	elseif &filetype == 'python'
+		call setline(1,"#!/usr/bin/env python")
+		call append(line("."),"# -*- coding: utf-8 -*-")
+		call append(line(".")+1, "") 
+	else 
+		call setline(1, "/*************************************************************************") 
+		call append(line("."), "	> File Name: ".expand("%")) 
+		call append(line(".")+1, "	> Author: ") 
+		call append(line(".")+2, "	> Mail: ") 
+		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
+		call append(line(".")+4, " ************************************************************************/") 
+		call append(line(".")+5, "")
+	endif
+	if expand("%:e") == 'cpp' || expand("%:e") == 'cc'
+		call append(line(".")+6, "#include <iostream>")
+		call append(line(".")+7, "")
+		call append(line(".")+8, "using namespace std;")
+		call append(line(".")+9, "")
+	endif
+	if &filetype == 'c'
+		call append(line(".")+6, "#include <stdio.h>")
+		call append(line(".")+7, "")
+	endif
+	if expand("%:e") == 'h'
+		call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+		call append(line(".")+8, "#endif")
+	endif
 endfunction
