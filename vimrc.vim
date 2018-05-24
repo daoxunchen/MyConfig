@@ -1,64 +1,34 @@
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-"
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/nerdtree'
-Plugin 'weynhamz/vim-plugin-minibufexpl'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'luochen1990/rainbow'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'jmcantrell/vim-virtualenv'
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'vim-scripts/JavaScript-Indent'
-" Plugin 'jsfaint/gen_tags.vim'
-" Plugin 'majutsushi/tagbar'
+" Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdtree',{ 'on':  'NERDTreeToggle' }
+Plug 'weynhamz/vim-plugin-minibufexpl'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Chiel92/vim-autoformat'
+Plug 'luochen1990/rainbow'
+Plug 'easymotion/vim-easymotion'
+Plug 'jmcantrell/vim-virtualenv'
+" Plug 'jelera/vim-javascript-syntax'
+" Plug 'vim-scripts/JavaScript-Indent'
+" Plug 'jsfaint/gen_tags.vim'
+" Plug 'majutsushi/tagbar'
 
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'davidhalter/jedi-vim'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'davidhalter/jedi-vim'
 
-Plugin 'Valloric/YouCompleteMe'
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'wincent/Command-T'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
+Plug 'Valloric/YouCompleteMe'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
+" Initialize plugin system
+call plug#end()
+
 " Put your non-Plugin stuff after this line
-"=============================== end of vundle===========================
+"=============================== end of vim-Plug===========================
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
