@@ -1,0 +1,3 @@
+[submodule "vim-init"]
+	path = vim-init
+	url = https://github.com/daoxunchen/vim-init.git
